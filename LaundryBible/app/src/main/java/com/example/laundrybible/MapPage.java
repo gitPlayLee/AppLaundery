@@ -1,11 +1,15 @@
 package com.example.laundrybible;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import android.Manifest;
 import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -24,6 +28,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.security.Permission;
 
 public class MapPage extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
     private GoogleMap mMap; // 맵에 대한 것
@@ -57,7 +63,7 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback, Goo
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-/*
+
         LocationManager lcManager = (LocationManager)this.getSystemService(Context.LOCATION_SERVICE);
         LocationListener lcListener = new LocationListener() {
             @Override
@@ -76,17 +82,20 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback, Goo
             public void onProviderDisabled(String provider) {
                 checkProvider(provider);
             }
-        };*/
+        };
 
-        // Add a marker in Sydney and move the camera
-        LatLng SEOUL = new LatLng(37.56, 126.97);
+        // 권한 승인에 대한 검사 및 처리 부분
 
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(SEOUL);
-        markerOptions.title("서울");
-        markerOptions.snippet("한국의 수도");
-        mMap.addMarker(markerOptions);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(SEOUL, 15));
+        int permission1 = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
+        int permission2 = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
+
+        if(permission1== PackageManager.PERMISSION_GRANTED && permission2==PackageManager.PERMISSION_GRANTED){
+            lcManager.requestLocationUpdates(lcManager.GPS_PROVIDER, 100, 0, lcListener);
+        }else{
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION},1);
+        }
+
     }
 
     private void checkProvider(String provider){
@@ -106,6 +115,16 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback, Goo
     private void updateMap(Location location){
         nowLatitude = location.getLatitude();   //위도
         nowLongitude = location.getLongitude(); //경도
+
+        System.out.println("위도: " + nowLatitude + " 경도: " + nowLongitude);
+
+        LatLng MYLOCATION = new LatLng(nowLatitude, nowLongitude);
+
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(MYLOCATION);
+        markerOptions.title("현재위치");
+        mMap.addMarker(markerOptions);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(MYLOCATION, 15));
     }
 
     @Override
