@@ -1,3 +1,5 @@
+//https://webnautes.tistory.com/1249 에서 지도 사용법 참고함
+
 package com.example.laundrybible;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +12,8 @@ import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -29,9 +33,19 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.IOException;
 import java.security.Permission;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
 
-public class MapPage extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
+import noman.googleplaces.NRPlaces;
+import noman.googleplaces.Place;
+import noman.googleplaces.PlaceType;
+import noman.googleplaces.PlacesException;
+import noman.googleplaces.PlacesListener;
+
+public class MapPage extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
     private GoogleMap mMap; // 맵에 대한 것
     Intent intent; // 화면 바꿀 때 필요
     Button retBtn; // 뒤로 가기 버튼
@@ -39,6 +53,7 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback, Goo
     // 나의 현재 위치 저장 장소
     double nowLatitude;  //위도
     double nowLongitude; //경도
+    //LatLng MYLOCATION = new LatLng(nowLatitude, nowLongitude);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,12 +100,11 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback, Goo
         };
 
         // 권한 승인에 대한 검사 및 처리 부분
-
         int permission1 = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
         int permission2 = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
 
         if(permission1== PackageManager.PERMISSION_GRANTED && permission2==PackageManager.PERMISSION_GRANTED){
-            lcManager.requestLocationUpdates(lcManager.GPS_PROVIDER, 100, 0, lcListener);
+            lcManager.requestLocationUpdates(lcManager.NETWORK_PROVIDER, 100, 0, lcListener);
         }else{
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
                     Manifest.permission.ACCESS_COARSE_LOCATION},1);
@@ -125,10 +139,12 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback, Goo
         markerOptions.title("현재위치");
         mMap.addMarker(markerOptions);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(MYLOCATION, 15));
+
     }
 
     @Override
     public boolean onMarkerClick(Marker marker) {
         return false;
     }
+
 }
