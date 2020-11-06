@@ -39,8 +39,7 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback, Goo
         retBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(MapPage.this, StartPage.class);
-                startActivity(intent);
+                finish();
             }
         });
     }
