@@ -8,23 +8,37 @@
     android:orientation="vertical"
     >
 
-    <TextView
-        android:id="@+id/detailText"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="300dp"
-        android:text="상세정보"
-        android:padding="12dp"
-        />
+        android:layout_height="0sp"
+        android:layout_weight="3"
+        android:padding="10sp"
+        >
+        <TextView
+            android:id="@+id/detailText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="상세정보"
+            android:textSize="25sp"
+            />
 
-    <TextView
-        android:id="@+id/resultText"
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="150dp"
-        android:text="평가정보"
-        android:padding="12dp"
-        />
+        android:layout_height="0sp"
+        android:layout_weight="2"
+        android:padding="10sp"
+        >
+        <TextView
+            android:id="@+id/resultText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="평가정보"
+            android:textSize="25sp"
+            />
+
+    </LinearLayout>
     <!-- 레이아웃으로 변경 필요 -->
 
     <RatingBar
@@ -35,16 +49,18 @@
         android:numStars="5"
         android:rating="0"
         android:stepSize="0.5"
+        android:layout_marginBottom="20sp"
         />
 
     <Button
         android:id="@+id/enter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right|bottom"
+        android:layout_gravity="center_horizontal"
         android:text="등록"
         android:textStyle="bold"
         android:textSize="20sp"
+        android:layout_marginBottom="10sp"
         />
 
 </LinearLayout>
