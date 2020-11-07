@@ -45,7 +45,8 @@ import noman.googleplaces.PlaceType;
 import noman.googleplaces.PlacesException;
 import noman.googleplaces.PlacesListener;
 
-public class MapPage extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
+public class MapPage extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener,
+ PlacesListener{
     private GoogleMap mMap; // 맵에 대한 것
     Intent intent; // 화면 바꿀 때 필요
     Button retBtn; // 뒤로 가기 버튼
@@ -54,6 +55,9 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback, Goo
     double nowLatitude;  //위도
     double nowLongitude; //경도
     //LatLng MYLOCATION = new LatLng(nowLatitude, nowLongitude);
+
+    List<Marker> previous_marker = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -134,6 +138,8 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback, Goo
 
         LatLng MYLOCATION = new LatLng(nowLatitude, nowLongitude);
 
+        showPlaceInformation(MYLOCATION);
+
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(MYLOCATION);
         markerOptions.title("현재위치");
@@ -147,4 +153,70 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback, Goo
         return false;
     }
 
+    public void showPlaceInformation(LatLng location)
+    {
+        mMap.clear();//지도 클리어
+
+        if (previous_marker != null)
+            previous_marker.clear();//지역정보 마커 클리어
+
+        new NRPlaces.Builder()
+                .listener(MapPage.this)
+                .key("AIzaSyC6D5JSjdjMdb7Dwba95zG7yR2FAdNbl4I")
+                .latlng(location.latitude, location.longitude)//현재 위치
+                .radius(500) //500 미터 내에서 검색
+                .type(PlaceType.RESTAURANT) //음식점
+
+                .language("ko", "KR")
+                .build()
+                .execute();
+    }
+
+    @Override
+    public void onPlacesFailure(PlacesException e) {
+
+    }
+
+    @Override
+    public void onPlacesStart() {
+
+    }
+
+    @Override
+    public void onPlacesSuccess(final List<Place> places) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("동작1");
+                for (noman.googleplaces.Place place : places) {
+
+                    LatLng latLng
+                            = new LatLng(place.getLatitude()
+                            , place.getLongitude());
+
+                    //String markerSnippet = getCurrentAddress(latLng);
+
+                    MarkerOptions markerOptions = new MarkerOptions();
+                    markerOptions.position(latLng);
+                    markerOptions.title(place.getName());
+                    //markerOptions.snippet(markerSnippet);
+                    Marker item = mMap.addMarker(markerOptions);
+                    previous_marker.add(item);
+
+                }
+
+                //중복 마커 제거
+                HashSet<Marker> hashSet = new HashSet<Marker>();
+                hashSet.addAll(previous_marker);
+                previous_marker.clear();
+                previous_marker.addAll(hashSet);
+
+            }
+        });
+    }
+
+    @Override
+    public void onPlacesFinished() {
+
+    }
 }
