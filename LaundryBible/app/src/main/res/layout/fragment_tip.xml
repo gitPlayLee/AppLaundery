@@ -11,17 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
-        <ScrollView
+        <FrameLayout
+            android:id="@+id/tipTool"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            >
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                >
-
-            </LinearLayout>
-        </ScrollView>
+            />
 
         <ListView
             android:id="@+id/menuList"
@@ -34,6 +28,7 @@
             android:id="@+id/meunBtn"
             android:layout_width="50sp"
             android:layout_height="50sp"
+            android:src="@drawable/ic_baseline_menu_open"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="10sp"
             android:layout_marginLeft="10sp"

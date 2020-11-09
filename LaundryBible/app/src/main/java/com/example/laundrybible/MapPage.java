@@ -165,8 +165,7 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback, Goo
                 .key("AIzaSyC6D5JSjdjMdb7Dwba95zG7yR2FAdNbl4I")
                 .latlng(location.latitude, location.longitude)//현재 위치
                 .radius(500) //500 미터 내에서 검색
-                .type(PlaceType.RESTAURANT) //음식점
-
+                .type(PlaceType.LAUNDRY) //세탁소
                 .language("ko", "KR")
                 .build()
                 .execute();

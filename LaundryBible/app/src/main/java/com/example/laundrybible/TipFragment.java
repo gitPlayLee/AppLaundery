@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +22,9 @@ public class TipFragment extends Fragment {
     ArrayList<String> textArray = new ArrayList<>();
     ListView meunList;
     FloatingActionButton menuBtn;
+
+    FragmentManager fragManager; // 프레그먼트 매니져
+    FragmentTransaction transjeck; //트랜잭션
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -47,10 +52,27 @@ public class TipFragment extends Fragment {
             @SuppressLint("RestrictedApi")
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position){
+                    case 0:
+                        System.out.println("첫 페이지");
+                        break;
+                    case 1:
+                        System.out.println("두 번째 페이지");
+                        break;
+                    case 2:
+                        System.out.println("세 번째 페이지");
+                        break;
+                }
                 meunList.setVisibility(View.INVISIBLE);
                 menuBtn.setVisibility(View.VISIBLE);
             }
         });
+
+        fragManager = getFragmentManager();
+        transjeck = fragManager.beginTransaction();
+        transjeck.replace(R.id.frgScreen, new TipFrag_1());
+        transjeck.commit();
+        // 첫 번째 프래그먼트 지정하기
 
         return view;
     }
