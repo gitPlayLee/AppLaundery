@@ -22,6 +22,7 @@
             android:layout_width="200sp"
             android:layout_height="match_parent"
             android:visibility="invisible"
+            android:background="#AFAFAF"
             />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton

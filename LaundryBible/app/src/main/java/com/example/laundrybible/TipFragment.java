@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 public class TipFragment extends Fragment {
     ArrayList<String> textArray = new ArrayList<>();
+    ArrayList<Fragment> frgList = new ArrayList<>();
     ListView meunList;
     FloatingActionButton menuBtn;
 
@@ -48,31 +49,30 @@ public class TipFragment extends Fragment {
             }
         });
 
+
+        frgList.add(new TipFrag_1());
+        frgList.add(new TipFrag_2());
+
+        fragManager = getFragmentManager();
+        transjeck = fragManager.beginTransaction();
+        transjeck.replace(R.id.tipTool, frgList.get(0));
+        transjeck.commit();
+        // 첫 번째 프래그먼트 지정하기
+
         meunList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @SuppressLint("RestrictedApi")
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch (position){
-                    case 0:
-                        System.out.println("첫 페이지");
-                        break;
-                    case 1:
-                        System.out.println("두 번째 페이지");
-                        break;
-                    case 2:
-                        System.out.println("세 번째 페이지");
-                        break;
-                }
+                fragManager = getFragmentManager(); // 매니져 재설정
+                transjeck = fragManager.beginTransaction(); // 트랜잭션 재설정
+                transjeck.addToBackStack(null);
+                transjeck.replace(R.id.tipTool, frgList.get(position));
+                transjeck.commit();
+
                 meunList.setVisibility(View.INVISIBLE);
                 menuBtn.setVisibility(View.VISIBLE);
             }
-        });
-
-        fragManager = getFragmentManager();
-        transjeck = fragManager.beginTransaction();
-        transjeck.replace(R.id.frgScreen, new TipFrag_1());
-        transjeck.commit();
-        // 첫 번째 프래그먼트 지정하기
+        }); // 리스트에서 선택하면 메뉴 바뀌기
 
         return view;
     }
