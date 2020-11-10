@@ -54,7 +54,7 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback, Goo
     // 나의 현재 위치 저장 장소
     double nowLatitude;  //위도
     double nowLongitude; //경도
-    //LatLng MYLOCATION = new LatLng(nowLatitude, nowLongitude);
+    LatLng MYLOCATION;
 
     List<Marker> previous_marker = null;
 
@@ -136,7 +136,7 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback, Goo
 
         System.out.println("위도: " + nowLatitude + " 경도: " + nowLongitude);
 
-        LatLng MYLOCATION = new LatLng(nowLatitude, nowLongitude);
+        MYLOCATION = new LatLng(nowLatitude, nowLongitude);
 
         showPlaceInformation(MYLOCATION);
 
@@ -145,11 +145,14 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback, Goo
         markerOptions.title("현재위치");
         mMap.addMarker(markerOptions);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(MYLOCATION, 15));
+        mMap.setOnMarkerClickListener(this);
 
     }
 
     @Override
     public boolean onMarkerClick(Marker marker) {
+        intent = new Intent(this, RatingPage.class);
+        startActivity(intent);
         return false;
     }
 
