@@ -57,6 +57,7 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback, Goo
     LatLng MYLOCATION;
 
     List<Marker> previous_marker = null;
+    MarkerOptions markerOption;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,10 +141,10 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback, Goo
 
         showPlaceInformation(MYLOCATION);
 
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(MYLOCATION);
-        markerOptions.title("현재위치");
-        mMap.addMarker(markerOptions);
+        markerOption = new MarkerOptions();
+        markerOption.position(MYLOCATION);
+        markerOption.title("현재위치");
+        mMap.addMarker(markerOption);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(MYLOCATION, 15));
         mMap.setOnMarkerClickListener(this);
 
@@ -152,6 +153,8 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback, Goo
     @Override
     public boolean onMarkerClick(Marker marker) {
         intent = new Intent(this, RatingPage.class);
+        intent.putExtra("latitude", markerOption.getPosition().latitude);
+        intent.putExtra("longitude", markerOption.getPosition().longitude);
         startActivity(intent);
         return false;
     }
