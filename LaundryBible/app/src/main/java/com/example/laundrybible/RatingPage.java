@@ -14,7 +14,7 @@ public class RatingPage extends AppCompatActivity {
     RatingBar rating; // 별로 평가하기
     Button resume; // 등록하기
 
-    TextView lat, lon; // 위도, 경도, 연습용
+    TextView lat, lon, lanName, addr; // 위도, 경도, 연습용
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,12 +28,17 @@ public class RatingPage extends AppCompatActivity {
 
         rating = findViewById(R.id.rating);
         resume = findViewById(R.id.Enrollment);
+        lanName = findViewById(R.id.lanName);
+        addr = findViewById(R.id.addr);
         lat = findViewById(R.id.lat);
         lon = findViewById(R.id.lon);
 
         String name = intent.getStringExtra("name");
+        String address = intent.getStringExtra("address");
         String latt = intent.getStringExtra("latitude");
         String lonn = intent.getStringExtra("longitude");
+        lanName.setText("업체명: " + name);
+        addr.setText("주소: " + address);
         lat.setText(latt+"");
         lon.setText(lonn+"");
 

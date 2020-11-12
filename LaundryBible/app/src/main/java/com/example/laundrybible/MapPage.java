@@ -151,17 +151,6 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback, Goo
 
     }
 
-    @Override
-    public boolean onMarkerClick(Marker marker) {
-        intent = new Intent(this, RatingPage.class);
-        intent.putExtra("latitude", marker.getPosition().latitude);
-        System.out.println(marker.getPosition().latitude);
-        intent.putExtra("longitude", marker.getPosition().longitude);
-        intent.putExtra("name", marker.getTitle());
-        startActivity(intent);
-        return false;
-    }
-
     public void showPlaceInformation(LatLng location)
     {
         mMap.clear();//지도 클리어
@@ -201,12 +190,12 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback, Goo
                             = new LatLng(place.getLatitude()
                             , place.getLongitude());
 
-                    //String markerSnippet = getCurrentAddress(latLng);
+                    String markerSnippet = getCurrentAddress(latLng);
 
                     MarkerOptions markerOptions = new MarkerOptions();
                     markerOptions.position(latLng);
                     markerOptions.title(place.getName());
-                    //markerOptions.snippet(markerSnippet);
+                    markerOptions.snippet(markerSnippet);
                     Marker item = mMap.addMarker(markerOptions);
                     previous_marker.add(item);
 
@@ -226,4 +215,51 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback, Goo
     public void onPlacesFinished() {
 
     }
+
+    public String getCurrentAddress(LatLng latlng) {
+
+        //지오코더... GPS를 주소로 변환
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+
+        List<Address> addresses;
+
+        try {
+
+            addresses = geocoder.getFromLocation(
+                    latlng.latitude,
+                    latlng.longitude,
+                    1);
+        } catch (IOException ioException) {
+            //네트워크 문제
+            Toast.makeText(this, "지오코더 서비스 사용불가", Toast.LENGTH_LONG).show();
+            return "지오코더 서비스 사용불가";
+        } catch (IllegalArgumentException illegalArgumentException) {
+            Toast.makeText(this, "잘못된 GPS 좌표", Toast.LENGTH_LONG).show();
+            return "잘못된 GPS 좌표";
+
+        }
+
+
+        if (addresses == null || addresses.size() == 0) {
+            Toast.makeText(this, "주소 미발견", Toast.LENGTH_LONG).show();
+            return "주소 미발견";
+
+        } else {
+            Address address = addresses.get(0);
+            return address.getAddressLine(0).toString();
+        }
+    } // 경도,위도를 주소로 변환
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        intent = new Intent(this, RatingPage.class);
+        intent.putExtra("latitude", marker.getPosition().latitude);
+        System.out.println(marker.getPosition().latitude);
+        intent.putExtra("longitude", marker.getPosition().longitude);
+        intent.putExtra("name", marker.getTitle());
+        intent.putExtra("address", marker.getSnippet());
+        startActivity(intent);
+        return false;
+    } // 마커 클릭 이벤트
+
 }

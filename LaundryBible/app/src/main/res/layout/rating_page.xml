@@ -24,6 +24,19 @@
             />
 
         <TextView
+            android:id="@+id/lanName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="업체명: "
+            />
+        <TextView
+            android:id="@+id/addr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="주소: "
+            />
+
+        <TextView
             android:id="@+id/lat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
