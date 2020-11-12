@@ -35,6 +35,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
 import java.security.Permission;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -56,8 +57,8 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback, Goo
     double nowLongitude; //경도
     LatLng MYLOCATION;
 
-    List<Marker> previous_marker = null;
-    MarkerOptions markerOption;
+    ArrayList<Marker> previous_marker = new ArrayList<>();
+    // 주변 위치 저장용
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,7 +110,7 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback, Goo
         int permission2 = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
 
         if(permission1== PackageManager.PERMISSION_GRANTED && permission2==PackageManager.PERMISSION_GRANTED){
-            lcManager.requestLocationUpdates(lcManager.NETWORK_PROVIDER, 100, 0, lcListener);
+            lcManager.requestLocationUpdates(lcManager.NETWORK_PROVIDER, 1000, 0, lcListener);
         }else{
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
                     Manifest.permission.ACCESS_COARSE_LOCATION},1);
@@ -137,14 +138,14 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback, Goo
 
         System.out.println("위도: " + nowLatitude + " 경도: " + nowLongitude);
 
-        MYLOCATION = new LatLng(nowLatitude, nowLongitude);
+        MYLOCATION = new LatLng(37.56, 126.97);
 
         showPlaceInformation(MYLOCATION);
 
-        markerOption = new MarkerOptions();
-        markerOption.position(MYLOCATION);
-        markerOption.title("현재위치");
-        mMap.addMarker(markerOption);
+        //markerOption = new MarkerOptions();
+        //markerOption.position(MYLOCATION);
+        //markerOption.title("현재위치");
+        //mMap.addMarker(markerOption);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(MYLOCATION, 15));
         mMap.setOnMarkerClickListener(this);
 
@@ -153,8 +154,10 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback, Goo
     @Override
     public boolean onMarkerClick(Marker marker) {
         intent = new Intent(this, RatingPage.class);
-        intent.putExtra("latitude", markerOption.getPosition().latitude);
-        intent.putExtra("longitude", markerOption.getPosition().longitude);
+        intent.putExtra("latitude", marker.getPosition().latitude);
+        System.out.println(marker.getPosition().latitude);
+        intent.putExtra("longitude", marker.getPosition().longitude);
+        intent.putExtra("name", marker.getTitle());
         startActivity(intent);
         return false;
     }
@@ -192,7 +195,6 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback, Goo
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                System.out.println("동작1");
                 for (noman.googleplaces.Place place : places) {
 
                     LatLng latLng

@@ -31,10 +31,11 @@ public class RatingPage extends AppCompatActivity {
         lat = findViewById(R.id.lat);
         lon = findViewById(R.id.lon);
 
+        String name = intent.getStringExtra("name");
         String latt = intent.getStringExtra("latitude");
         String lonn = intent.getStringExtra("longitude");
-        lat.setText(latt);
-        lon.setText(lonn);
+        lat.setText(latt+"");
+        lon.setText(lonn+"");
 
 
     }
