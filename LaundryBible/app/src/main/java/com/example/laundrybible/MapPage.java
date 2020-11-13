@@ -5,6 +5,7 @@ package com.example.laundrybible;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
@@ -23,6 +24,9 @@ import android.view.ActionMode;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -60,6 +64,10 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback, Goo
     ArrayList<Marker> previous_marker = new ArrayList<>();
     // 주변 위치 저장용
 
+    RelativeLayout datalayout;
+    TextView nameTxt, addrTxt;
+    Button downBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +80,11 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback, Goo
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        datalayout = findViewById(R.id.makerData);
+        nameTxt = findViewById(R.id.getName);
+        addrTxt = findViewById(R.id.getAddr);
+        downBtn = findViewById(R.id.makerDown);
+
         retBtn = findViewById(R.id.retBtn);
         retBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +92,14 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback, Goo
                 finish();
             }
         });
+
+        downBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                datalayout.setVisibility(View.INVISIBLE);
+            }
+        });
+
     }
 
     @Override
@@ -252,14 +273,19 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback, Goo
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-        intent = new Intent(this, RatingPage.class);
+        nameTxt.setText(marker.getTitle()+"");
+        addrTxt.setText(marker.getSnippet()+"");
+        datalayout.setVisibility(View.VISIBLE);
+        return false;
+    } // 마커 클릭 이벤트
+    /*
+    intent = new Intent(this, RatingPage.class);
         intent.putExtra("latitude", marker.getPosition().latitude);
         System.out.println(marker.getPosition().latitude);
         intent.putExtra("longitude", marker.getPosition().longitude);
         intent.putExtra("name", marker.getTitle());
         intent.putExtra("address", marker.getSnippet());
         startActivity(intent);
-        return false;
-    } // 마커 클릭 이벤트
+    */
 
 }
