@@ -272,20 +272,23 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback, Goo
     } // 경도,위도를 주소로 변환
 
     @Override
-    public boolean onMarkerClick(Marker marker) {
+    public boolean onMarkerClick(final Marker marker) {
         nameTxt.setText(marker.getTitle()+"");
         addrTxt.setText(marker.getSnippet()+"");
         datalayout.setVisibility(View.VISIBLE);
+        datalayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(getApplication(), RatingPage.class);
+                intent.putExtra("latitude", marker.getPosition().latitude);
+                System.out.println(marker.getPosition().latitude);
+                intent.putExtra("longitude", marker.getPosition().longitude);
+                intent.putExtra("name", marker.getTitle());
+                intent.putExtra("address", marker.getSnippet());
+                startActivity(intent);
+            }
+        });
         return false;
     } // 마커 클릭 이벤트
-    /*
-    intent = new Intent(this, RatingPage.class);
-        intent.putExtra("latitude", marker.getPosition().latitude);
-        System.out.println(marker.getPosition().latitude);
-        intent.putExtra("longitude", marker.getPosition().longitude);
-        intent.putExtra("name", marker.getTitle());
-        intent.putExtra("address", marker.getSnippet());
-        startActivity(intent);
-    */
-
+    
 }
