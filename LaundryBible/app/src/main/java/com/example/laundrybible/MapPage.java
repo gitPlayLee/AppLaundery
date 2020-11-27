@@ -290,5 +290,5 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback, Goo
         });
         return false;
     } // 마커 클릭 이벤트
-    
+
 }
