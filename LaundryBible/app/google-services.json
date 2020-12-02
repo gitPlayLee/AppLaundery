@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1034851228831",
+    "firebase_url": "https://applaundery.firebaseio.com",
+    "project_id": "applaundery",
+    "storage_bucket": "applaundery.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1034851228831:android:2796f06439e6f66ad396aa",
+        "android_client_info": {
+          "package_name": "com.example.laundrybible"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1034851228831-2mgvbvoudsm63f3uno7rio2d57eluk1p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.laundrybible",
+            "certificate_hash": "75055ab8fe224e48afe4108b65379383ace0bc4b"
+          }
+        },
+        {
+          "client_id": "1034851228831-30nqosgk112fup0p3ogb9u1ahdq9usd4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTR_A1PnemMYTEdE2pHXwTyp14wHuttjw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1034851228831-30nqosgk112fup0p3ogb9u1ahdq9usd4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
