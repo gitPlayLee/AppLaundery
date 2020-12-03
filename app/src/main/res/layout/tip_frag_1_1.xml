@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".TipFrag_1"
+    android:orientation="vertical"
+    >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="7sp"
+       >
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="1. 옷에 화장품이 묻었을 때
+-> 알코올(에탄올)을 뿌린 후 물로 세척한다. 립앤아이리무버도 효과가 있다." />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="2. 옷에 볼펜(지용성)이 묻었을 때
+-> 주방세제, 아세톤, 클렌징폼 , 치약을 사용해 지울 수 있다. 긴급상황이라면 같은 지용성 성분이 들어 있는 핸드크림을 발라 문질러 지운다. " />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="3. 커피를 쏟았을 때
+-> 무가당 탄산수를 이용해 문지르거나 아예 푹 담가 놓는다." />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="4. 짜장 소스가 튀었을 때
+-> 식초를 뿌려 비빈 후 물로 헹군다. 식초에는 카라멜 색소 표백효과를 내는 유기산이 들어있다." />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="5. 빨래를 해도 퀴퀴한 냄새가 날 때
+-> 빨래를 해도 옷에서 퀴퀴한 냄새가 난다면 미온수에 샴푸를 풀어 헹군다." />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="6. 오래된 혈흔 얼룩을 지우고 싶을 때
+-> 혈흔 자국에 과산화수소를 뿌린 후 거품이 잦아들면 가루세제를 위에 뿌려 비벼준다." />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="7. 검은색 옷이 바랬을 경우 되살리는 법
+-> 마시다가 남은 맥주를 헹굼물에 넣어 한참동안 담갔다가 탈수해서 그늘에 말리면 막 샀을 때와 같은 선명한 검은색이 되살아 난다." />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="8. 얼룩생긴 흰 천을 깨끗하게 하는 법
+-> 달걀껍데기는 흰색 천은 깨끗하게 하는 표백효과가 있는데 누렇게 되거나 얼룩이 묻은 행주나 냅킨 , 손수건 등을 달걀껍데기와 함께 삶으면 표백제가 무색할 정도로 깨끗해진다. 삶은 뒤에는 물로 깨끗이 헹구어 준다. 또 달걀 껍데기를 잘게 부수어 거즈에 빈트이 없도록 꼭 싼 뒤 분무기로 물을 살짝 뿌려 마루바닥을 문질러주면 아주 매끄럽게 된다." />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="9. 간장이 묻었을 때
+-> 소금물을 칫솔에 묻혀 간장이 묻은 부위를 가볍게 문지른다. 그런 다음 설탕물을 칫솔에 묻혀 두드리면 얼룩이 제거된다." />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="10. 김치국물로 인한 얼룩이 생겼을 때
+-> 식초에 주방 세제를 섞어 얼룩진 부분에 바른 후 미지근한 물에 헹군다. 그런 다음 일반 세제로 빨면 깨끗해진다." />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

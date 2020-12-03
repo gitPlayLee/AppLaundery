@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".TipFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <FrameLayout
+            android:id="@+id/tipTool"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+        <ImageView
+            android:id="@+id/tipImg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/ic_launcher_round"
+            android:visibility="invisible"
+            />
+
+        <ListView
+            android:id="@+id/menuList"
+            android:layout_width="200sp"
+            android:layout_height="match_parent"
+            android:visibility="invisible"
+            android:background="#AFAFAF"
+            />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/meunBtn"
+            android:layout_width="50sp"
+            android:layout_height="50sp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="10sp"
+            android:layout_marginBottom="10sp"
+            android:src="@drawable/ic_baseline_menu_open" />
+
+    </RelativeLayout>
+
+</LinearLayout>
