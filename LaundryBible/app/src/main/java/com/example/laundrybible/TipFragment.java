@@ -20,6 +20,7 @@ import android.widget.ListView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class TipFragment extends Fragment {
     ArrayList<String> textArray = new ArrayList<>();
@@ -39,7 +40,11 @@ public class TipFragment extends Fragment {
         textArray.clear();
         textArray.add("상황별 세탁 방법"); //글 내용 tip_frag_1_1.xml에 작성
         textArray.add("옷감별 세탁 방법"); //글 내용 tip_frag_2_1.xml에 작성
-        textArray.add("세 번쨰");
+        textArray.add("1. 아크릴"); textArray.add("2. 앙고라"); textArray.add("3. 캐시미어"); textArray.add("4. 쉬폰");
+        textArray.add("5. 코튼(면)"); textArray.add("6. 데님"); textArray.add("7. 퍼"); textArray.add("8. 기모");
+        textArray.add("9. 가죽(레더)"); textArray.add("10. 마(린넨)"); textArray.add("11. 나일론"); textArray.add("12. 폴리에스테르");
+        textArray.add("13. 레이온"); textArray.add("14. 실크"); textArray.add("15. 스웨이드"); textArray.add("16. 텐셀");
+        textArray.add("17. 트위드"); textArray.add("18. 울(양모)"); textArray.add("세 번쨰");
         // 이미지 수 만큼 add로 항목 넣어주기
 
         tiptool = view.findViewById(R.id.tipTool);
@@ -87,19 +92,24 @@ public class TipFragment extends Fragment {
                     tiptool.setVisibility(View.INVISIBLE);
                     //세탁 항목만큼 case 추가 및 이미지 작업 필요
                     switch (position){
-                        case 2:
-                            //tipImg.setImageResource();
-                            break;
-                        case 3: break;
-                        case 4: break;
-                        case 5: break;
-                        case 6: break;
-                        case 7: break;
-                        case 8: break;
-                        case 9: break;
-                        case 10: break;
-                        case 11: break;
-                        case 12: break;
+                        case 2: tipImg.setImageResource(R.drawable.acrylic); break;
+                        case 3: tipImg.setImageResource(R.drawable.angora); break;
+                        case 4: tipImg.setImageResource(R.drawable.cashmere); break;
+                        case 5: tipImg.setImageResource(R.drawable.chiffon); break;
+                        case 6: tipImg.setImageResource(R.drawable.cotton); break;
+                        case 7: tipImg.setImageResource(R.drawable.denim); break;
+                        case 8: tipImg.setImageResource(R.drawable.fur); break;
+                        case 9: tipImg.setImageResource(R.drawable.gimo); break;
+                        case 10: tipImg.setImageResource(R.drawable.leather); break;
+                        case 11: tipImg.setImageResource(R.drawable.linen); break;
+                        case 12: tipImg.setImageResource(R.drawable.nylon); break;
+                        case 13: tipImg.setImageResource(R.drawable.polyester); break;
+                        case 14: tipImg.setImageResource(R.drawable.rayon); break;
+                        case 15: tipImg.setImageResource(R.drawable.silk); break;
+                        case 16: tipImg.setImageResource(R.drawable.suede); break;
+                        case 17: tipImg.setImageResource(R.drawable.tencel); break;
+                        case 18: tipImg.setImageResource(R.drawable.tweed); break;
+                        case 19: tipImg.setImageResource(R.drawable.wool); break;
                     }
                 }
 
