@@ -21,8 +21,139 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="첫 번째 페이지"
-                android:textSize="30sp"
+                android:text="상황별 세탁 방법"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:textSize="35dp"
+                android:padding="4dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="1. 옷에 화장품이 묻었을 때"
+                android:textSize="25dp"
+                android:layout_marginBottom="5dp"
+                android:textColor="#000000"
+            />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" - 알코올(에탄올)을 뿌린 후 물로 세척한다.\n - 립앤아이리무버도 효과가 있다."
+                android:textSize="20dp"
+                android:layout_marginBottom="20dp"
+                android:padding="5dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="2. 옷에 볼펜(지용성)이 묻었을 때"
+                android:textSize="25dp"
+                android:layout_marginBottom="5dp"
+                android:textColor="#000000"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" - 주방세제, 아세톤, 클렌징폼 , 치약을 사용해 지울 수 있다.\n - 긴급상황이라면 같은 지용성 성분이 들어 있는 핸드크림을 발라 문질러 지운다."
+                android:textSize="20dp"
+                android:padding="5dp"
+                android:layout_marginBottom="20dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="3. 옷에 커피를 쏟았을 때"
+                android:textSize="25dp"
+                android:layout_marginBottom="5dp"
+                android:textColor="#000000"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" - 무가당 탄산수를 이용해 문지르거나 아예 푹 담가 놓는다."
+                android:textSize="20dp"
+                android:padding="5dp"
+                android:layout_marginBottom="20dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="4. 옷에 짜장소스가 튀었을 때"
+                android:textSize="25dp"
+                android:layout_marginBottom="5dp"
+                android:textColor="#000000"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" - 식초를 뿌려 비빈 후 물로 헹군다.\n - 식초에는 카라멜 색소 표백효과를 내는 유기산이 들어있다."
+                android:textSize="20dp"
+                android:padding="5dp"
+                android:layout_marginBottom="20dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5. 빨래를 해도 퀴퀴한 냄새가 날 때"
+                android:textSize="25dp"
+                android:layout_marginBottom="5dp"
+                android:textColor="#000000"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" - 빨래를 해도 옷에서 퀴퀴한 냄새가 난다면 미온수에 샴푸를 풀어 헹군다."
+                android:textSize="20dp"
+                android:padding="5dp"
+                android:layout_marginBottom="20dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="6. 오래된 혈흔 얼룩을 지우고 싶을 때"
+                android:textSize="25dp"
+                android:layout_marginBottom="5dp"
+                android:textColor="#000000"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" - 혈흔 자국에 과산화수소를 뿌린 후 거품이 잦아들면 가루세제를 위에 뿌려 비벼준다."
+                android:textSize="20dp"
+                android:padding="5dp"
+                android:layout_marginBottom="20dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="7. 검은 옷이 바랬을 경우 되살리는 법"
+                android:textSize="25dp"
+                android:layout_marginBottom="5dp"
+                android:textColor="#000000"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" - 마시다가 남은 맥주를 헹굼물에 넣어 한참동안 담갔다가 탈수해서 그늘에 말리면 막 샀을 때와 같은 선명한 검은색이 되살아 난다."
+                android:textSize="20dp"
+                android:padding="5dp"
+                android:layout_marginBottom="20dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="8. 얼룩생긴 흰 천을 깨끗하게 하는 법"
+                android:textSize="25dp"
+                android:layout_marginBottom="5dp"
+                android:textColor="#000000"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" - 달걀껍데기는 흰색 천은 깨끗하게 하는 표백효과가 있는데 누렇게 되거나 얼룩이 묻은 행주나 냅킨 , 손수건 등을 달걀껍데기와 함께 삶으면 표백제가 무색할 정도로 깨끗해진다. \n - 삶은 뒤에는 물로 깨끗이 헹구어 준다. 또 달걀 껍데기를 잘게 부수어 거즈에 빈트이 없도록 꼭 싼 뒤 분무기로 물을 살짝 뿌려 마루바닥을 문질러주면 아주 매끄럽게 된다."
+                android:textSize="20dp"
+                android:padding="5dp"
+                android:layout_marginBottom="60dp"
                 />
         </LinearLayout>
     </ScrollView>

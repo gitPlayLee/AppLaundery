@@ -44,7 +44,7 @@ public class TipFragment extends Fragment {
         textArray.add("5. 코튼(면)"); textArray.add("6. 데님"); textArray.add("7. 퍼"); textArray.add("8. 기모");
         textArray.add("9. 가죽(레더)"); textArray.add("10. 마(린넨)"); textArray.add("11. 나일론"); textArray.add("12. 폴리에스테르");
         textArray.add("13. 레이온"); textArray.add("14. 실크"); textArray.add("15. 스웨이드"); textArray.add("16. 텐셀");
-        textArray.add("17. 트위드"); textArray.add("18. 울(양모)"); textArray.add("세 번쨰");
+        textArray.add("17. 트위드"); textArray.add("18. 울(양모)");
         // 이미지 수 만큼 add로 항목 넣어주기
 
         tiptool = view.findViewById(R.id.tipTool);
