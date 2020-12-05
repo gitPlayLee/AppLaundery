@@ -28,10 +28,10 @@ import java.util.Map;
 public class RatingPage extends AppCompatActivity{
     Intent intent;
     RatingBar rating; // 별로 평가하기
-    Button resume; // 등록하기
+    Button resume, cancel; // 등록하기
 
     TextView lat, lon, lanName, addr; // 위도, 경도, 연습용
-    TextView star5, star4, star3, star2, star1;
+    TextView star5, star4, star3, star2, star1, starAvg;
 
     private DatabaseReference mDatabase;
 
@@ -49,6 +49,7 @@ public class RatingPage extends AppCompatActivity{
 
         rating = findViewById(R.id.rating);
         resume = findViewById(R.id.Enrollment);
+        cancel = findViewById(R.id.Cancel);
         lanName = findViewById(R.id.lanName);
         addr = findViewById(R.id.addr);
         lat = findViewById(R.id.lat);
@@ -59,6 +60,7 @@ public class RatingPage extends AppCompatActivity{
         star3 = findViewById(R.id.star3);
         star2 = findViewById(R.id.star2);
         star1 = findViewById(R.id.star1);
+        starAvg = findViewById(R.id.starAvg);
 
         String name = intent.getStringExtra("name");
         final String address = intent.getStringExtra("address");
@@ -85,7 +87,7 @@ public class RatingPage extends AppCompatActivity{
                     star3.setText(ratingObj.getThree()+"명");
                     star2.setText(ratingObj.getTwo()+"명");
                     star1.setText(ratingObj.getOne()+"명");
-                    Toast.makeText(RatingPage.this, "성공.", Toast.LENGTH_SHORT).show();
+                    calcularAvg();
                 }catch (Exception e){ // 등록 정보가 없을 경우, 오류가 생김
                     ratingObj = new Rating();
                     star5.setText("0명");
@@ -94,6 +96,7 @@ public class RatingPage extends AppCompatActivity{
                     star2.setText("0명");
                     star1.setText("0명");
                 }
+
             }
 
             @Override
@@ -120,8 +123,27 @@ public class RatingPage extends AppCompatActivity{
                 finish();
             }
        });
+        //취소하기
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
     }
+
+    public void calcularAvg(){
+        float avg = 0; //평균
+        int member = 0; // 평가 수
+        member = ratingObj.five + ratingObj.four + ratingObj.three + ratingObj.two + ratingObj.one;
+        avg = (ratingObj.five * 5) + (ratingObj.four * 4)
+                + (ratingObj.three * 3) + (ratingObj.two * 2)
+                + (ratingObj.one * 1);
+        avg = avg / member;
+        starAvg.setText(avg+"점");
+    }
+
 
 //데이터베이스에 주소, 레이팅 저장
     public void saveLaundry(String address, float rating) {
@@ -130,19 +152,14 @@ public class RatingPage extends AppCompatActivity{
 
         if(rating == 5) {
             ratingObj.five = ratingObj.five + 1;
-            star5.setText(Integer.toString(ratingObj.five) + "명");
         } else if(rating == 4) {
             ratingObj.four = ratingObj.four + 1;
-            star4.setText(Integer.toString(ratingObj.four) + "명");
         } else if(rating == 3) {
             ratingObj.three = ratingObj.three + 1;
-            star3.setText(Integer.toString(ratingObj.three) + "명");
         } else if(rating == 2) {
             ratingObj.two = ratingObj.two + 1;
-            star2.setText(Integer.toString(ratingObj.two) + "명");
         } else if(rating == 1) {
             ratingObj.one = ratingObj.one + 1;
-            star1.setText(Integer.toString(ratingObj.one) + "명");
         }
 
         mDatabase.child("users").child(address).setValue(ratingObj)
