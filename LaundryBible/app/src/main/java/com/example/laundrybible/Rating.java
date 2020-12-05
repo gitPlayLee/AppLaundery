@@ -2,11 +2,11 @@ package com.example.laundrybible;
 
 public class Rating {
 
-    public int five;
-    public int four;
-    public int three;
-    public int two;
-    public int one;
+    public int five=0;
+    public int four=0;
+    public int three=0;
+    public int two=0;
+    public int one=0;
 
     public int getFive() {
         return five;

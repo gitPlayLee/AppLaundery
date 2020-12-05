@@ -35,6 +35,7 @@ public class RatingPage extends AppCompatActivity{
 
     private DatabaseReference mDatabase;
 
+    Rating ratingObj = new Rating();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +61,7 @@ public class RatingPage extends AppCompatActivity{
         star1 = findViewById(R.id.star1);
 
         String name = intent.getStringExtra("name");
-        String address = intent.getStringExtra("address");
+        final String address = intent.getStringExtra("address");
         String latt = intent.getStringExtra("latitude");
         String lonn = intent.getStringExtra("longitude");
         lanName.setText("업체명: " + name);
@@ -71,10 +72,42 @@ public class RatingPage extends AppCompatActivity{
         //firebase 정의
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String addr = address;
+                System.out.println(addr);
+                ratingObj = snapshot.child("users").child(addr).getValue(Rating.class);
+
+                try {
+                    star5.setText(ratingObj.getFive()+"명");
+                    star4.setText(ratingObj.getFour()+"명");
+                    star3.setText(ratingObj.getThree()+"명");
+                    star2.setText(ratingObj.getTwo()+"명");
+                    star1.setText(ratingObj.getOne()+"명");
+                    Toast.makeText(RatingPage.this, "성공.", Toast.LENGTH_SHORT).show();
+                }catch (Exception e){ // 등록 정보가 없을 경우, 오류가 생김
+                    ratingObj = new Rating();
+                    star5.setText("0명");
+                    star4.setText("0명");
+                    star3.setText("0명");
+                    star2.setText("0명");
+                    star1.setText("0명");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        // 등록 - 저장하기 버튼 클릭 이벤트
         resume.setOnClickListener(new View.OnClickListener() {
             @Override
                 public void onClick(View v) {
-                    String getAddress = addr.getText().toString();
+                    //String getAddress = addr.getText().toString();
+                    String getAddress = address;
                     float getRating = rating.getRating();
 
 
@@ -84,6 +117,7 @@ public class RatingPage extends AppCompatActivity{
                 result.put("rating", getRating);
 
                 saveLaundry(getAddress,getRating);
+                finish();
             }
        });
 
@@ -92,23 +126,7 @@ public class RatingPage extends AppCompatActivity{
 //데이터베이스에 주소, 레이팅 저장
     public void saveLaundry(String address, float rating) {
 
-        Rating ratingObj = new Rating();
-
-        mDatabase.child("users").child(address).setValue(ratingObj)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        // Write was successful!
-                        Toast.makeText(RatingPage.this, "저장을 완료했습니다.", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        // Write failed
-                        Toast.makeText(RatingPage.this, "저장을 실패했습니다.", Toast.LENGTH_SHORT).show();
-                    }
-                });
+        //Rating ratingObj = new Rating();
 
         if(rating == 5) {
             ratingObj.five = ratingObj.five + 1;
@@ -126,6 +144,22 @@ public class RatingPage extends AppCompatActivity{
             ratingObj.one = ratingObj.one + 1;
             star1.setText(Integer.toString(ratingObj.one) + "명");
         }
+
+        mDatabase.child("users").child(address).setValue(ratingObj)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        // Write was successful!
+                        Toast.makeText(RatingPage.this, "저장을 완료했습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Write failed
+                        Toast.makeText(RatingPage.this, "저장을 실패했습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
     };
 
