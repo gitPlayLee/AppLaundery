@@ -68,6 +68,9 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback, Goo
     TextView nameTxt, addrTxt;
     Button downBtn;
 
+    String val = "0";
+    String txt = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +82,12 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback, Goo
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        intent = getIntent();
+        val = intent.getStringExtra("val");
+        if(val.equals("1")){
+            txt = intent.getStringExtra("search");
+        }
 
         datalayout = findViewById(R.id.makerData);
         nameTxt = findViewById(R.id.getName);
@@ -217,9 +226,16 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback, Goo
                     markerOptions.position(latLng);
                     markerOptions.title(place.getName());
                     markerOptions.snippet(markerSnippet);
-                    Marker item = mMap.addMarker(markerOptions);
-                    previous_marker.add(item);
 
+                    if(val.equals("1")){
+                        if(markerOptions.getTitle().contains(txt)){
+                            Marker item = mMap.addMarker(markerOptions);
+                            previous_marker.add(item);
+                        }else {}
+                    }else{
+                        Marker item = mMap.addMarker(markerOptions);
+                        previous_marker.add(item);
+                    }
                 }
 
                 //중복 마커 제거
