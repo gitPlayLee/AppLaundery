@@ -19,6 +19,8 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.Settings;
 import android.view.ActionMode;
 import android.view.View;
@@ -168,7 +170,8 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback, Goo
 
         System.out.println("위도: " + nowLatitude + " 경도: " + nowLongitude);
 
-        MYLOCATION = new LatLng(37.56, 126.97);
+        //MYLOCATION = new LatLng(37.56, 126.97);
+        MYLOCATION = new LatLng(nowLatitude, nowLongitude);
 
         showPlaceInformation(MYLOCATION);
 
@@ -201,7 +204,14 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback, Goo
 
     @Override
     public void onPlacesFailure(PlacesException e) {
-
+        Handler mHandler = new Handler(Looper.getMainLooper());
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // 사용하고자 하는 코드
+                Toast.makeText(MapPage.this, "빨래방&세탁소를 찾을 수 없습니다.", Toast.LENGTH_SHORT).show();
+            }
+        }, 0);
     }
 
     @Override
@@ -296,9 +306,6 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback, Goo
             @Override
             public void onClick(View v) {
                 intent = new Intent(getApplication(), RatingPage.class);
-                intent.putExtra("latitude", marker.getPosition().latitude);
-                System.out.println(marker.getPosition().latitude);
-                intent.putExtra("longitude", marker.getPosition().longitude);
                 intent.putExtra("name", marker.getTitle());
                 intent.putExtra("address", marker.getSnippet());
                 startActivity(intent);

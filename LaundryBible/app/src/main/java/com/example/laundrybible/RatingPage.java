@@ -30,7 +30,7 @@ public class RatingPage extends AppCompatActivity{
     RatingBar rating; // 별로 평가하기
     Button resume, cancel; // 등록하기
 
-    TextView lat, lon, lanName, addr; // 위도, 경도, 연습용
+    TextView lanName, addr; // 위도, 경도, 연습용
     TextView star5, star4, star3, star2, star1, starAvg;
 
     private DatabaseReference mDatabase;
@@ -52,8 +52,6 @@ public class RatingPage extends AppCompatActivity{
         cancel = findViewById(R.id.Cancel);
         lanName = findViewById(R.id.lanName);
         addr = findViewById(R.id.addr);
-        lat = findViewById(R.id.lat);
-        lon = findViewById(R.id.lon);
 
         star5 = findViewById(R.id.star5);
         star4 = findViewById(R.id.star4);
@@ -68,8 +66,6 @@ public class RatingPage extends AppCompatActivity{
         String lonn = intent.getStringExtra("longitude");
         lanName.setText("업체명: " + name);
         addr.setText("주소: " + address);
-        lat.setText(latt + "");
-        lon.setText(lonn + "");
 
         //firebase 정의
         mDatabase = FirebaseDatabase.getInstance().getReference();
