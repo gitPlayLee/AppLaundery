@@ -170,11 +170,12 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback, Goo
 
         System.out.println("위도: " + nowLatitude + " 경도: " + nowLongitude);
 
-        //MYLOCATION = new LatLng(37.56, 126.97);
+        MYLOCATION = new LatLng(37.56, 126.97);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(MYLOCATION, 15));
+        //디폴트로 서울 보여주기
+
         MYLOCATION = new LatLng(nowLatitude, nowLongitude);
-
         showPlaceInformation(MYLOCATION);
-
         //markerOption = new MarkerOptions();
         //markerOption.position(MYLOCATION);
         //markerOption.title("현재위치");
